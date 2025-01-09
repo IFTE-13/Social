@@ -1,10 +1,10 @@
 import { getDBUserId } from "@/actions/user";
 import CreatePost from "@/components/CreatePost";
+import WhoToFollow from "@/components/home/WhoToFollow";
 import { currentUser } from "@clerk/nextjs/server";
 
 export default async function Home() {
   const user = await currentUser();
-  const dbUserId = await getDBUserId();
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
@@ -17,7 +17,7 @@ export default async function Home() {
       </div>
 
       <div className="hidden lg:block lg:col-span-4 sticky top-20">
-        Who to follow
+        <WhoToFollow />
       </div>
     </div>
   );
