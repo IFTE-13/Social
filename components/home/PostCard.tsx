@@ -7,11 +7,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { formatDistanceToNow } from "date-fns";
-import { DeleteAlertDialog } from "./DeleteAlertDialog";
 import { Button } from "@/components/ui/button";
 import { HeartIcon, LogInIcon, MessageCircleIcon, SendIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { DeleteAlertDialog } from "./DeleteAlertDialog";
 
 type Posts = Awaited<ReturnType<typeof getPosts>>;
 type Post = Posts[number];
@@ -47,11 +47,11 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
       setIsCommenting(true);
       const result = await createComment(post.id, newComment);
       if (result?.success) {
-        toast.success("Comment posted successfully");
+        toast.success("Comment posted");
         setNewComment("");
       }
     } catch (error) {
-      toast.error("Failed to add comment");
+      toast.error("Failed to comment");
     } finally {
       setIsCommenting(false);
     }
