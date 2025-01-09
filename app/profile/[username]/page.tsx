@@ -18,7 +18,8 @@ import ProfilePageClient from "./ProfilePageClient";
   }
   
   async function ProfilePageServer({ params }: { params: { username: string } }) {
-    const user = await getProfileByUsername(params.username);
+    const resolvedUsername = await params.username;
+    const user = await getProfileByUsername(resolvedUsername);
   
     if (!user) notFound();
   

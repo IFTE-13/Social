@@ -16,7 +16,7 @@ export const ourFileRouter = {
 
       return { userId };
     })
-    .onUploadComplete(async ({ metadata, file }) => {
+    .onUploadComplete(async ({ file }) => {
       try {
         return { fileUrl: file.url };
       } catch (error) {

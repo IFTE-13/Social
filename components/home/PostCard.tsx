@@ -12,6 +12,7 @@ import { HeartIcon, LogInIcon, MessageCircleIcon, SendIcon } from "lucide-react"
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { DeleteAlertDialog } from "./DeleteAlertDialog";
+import Image from "next/image";
 
 type Posts = Awaited<ReturnType<typeof getPosts>>;
 type Post = Posts[number];
@@ -34,6 +35,7 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
       setOptmisticLikes((prev) => prev + (hasLiked ? -1 : 1));
       await toggleLike(post.id);
     } catch (error) {
+      console.log(error)
       setOptmisticLikes(post._count.likes);
       setHasLiked(post.likes.some((like) => like.userId === dbUserId));
     } finally {
@@ -51,6 +53,7 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
         setNewComment("");
       }
     } catch (error) {
+      console.log(error)
       toast.error("Failed to comment");
     } finally {
       setIsCommenting(false);
@@ -65,6 +68,7 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
       if (result.success) toast.success("Post deleted successfully");
       else throw new Error(result.error);
     } catch (error) {
+      console.log(error)
       toast.error("Failed to delete post");
     } finally {
       setIsDeleting(false);
@@ -107,7 +111,7 @@ function PostCard({ post, dbUserId }: { post: Post; dbUserId: string | null }) {
 
           {post.image && (
             <div className="rounded-lg overflow-hidden">
-              <img src={post.image} alt="Post content" className="w-full h-auto object-cover" />
+              <Image src={post.image} alt="Post content" className="w-full h-auto object-cover" />
             </div>
           )}
 
