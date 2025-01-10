@@ -80,8 +80,8 @@ function ProfilePageClient({
       await toggleFollow(user.id);
       setIsFollowing(!isFollowing);
     } catch (error) {
-      console.log(error)
       toast.error("Failed to update follow status");
+      throw error;
     } finally {
       setIsUpdatingFollow(false);
     }
@@ -204,7 +204,7 @@ function ProfilePageClient({
           <TabsContent value="posts" className="mt-6">
             <div className="space-y-6">
               {posts.length > 0 ? (
-                posts.map((post) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
+                posts.map((post: Posts) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
               ) : (
                 <div className="text-center py-8 text-muted-foreground">No posts yet</div>
               )}
@@ -214,7 +214,7 @@ function ProfilePageClient({
           <TabsContent value="likes" className="mt-6">
             <div className="space-y-6">
               {likedPosts.length > 0 ? (
-                likedPosts.map((post) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
+                likedPosts.map((post: Posts) => <PostCard key={post.id} post={post} dbUserId={user.id} />)
               ) : (
                 <div className="text-center py-8 text-muted-foreground">No liked posts to show</div>
               )}

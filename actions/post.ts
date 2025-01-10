@@ -153,7 +153,7 @@ export async function toggleLike(postId: string) {
   
       if (!post) throw new Error("Post not found");
   
-      const [comment] = await prisma.$transaction(async (tx) => {
+      const [comment] = await prisma.$transaction(async (tx: { comment: { create: (arg0: { data: { content: string; authorId: string; postId: string; }; }) => any; }; notification: { create: (arg0: { data: { type: string; userId: string; creatorId: string; postId: string; commentId: string; }; }) => any; }; }) => {
         const newComment = await tx.comment.create({
           data: {
             content,

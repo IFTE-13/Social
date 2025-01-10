@@ -39,7 +39,7 @@ function NotificationPage() {
         const data = await getNotifications();
         setNotifications(data);
 
-        const unreadIds = data.filter((n) => !n.read).map((n) => n.id);
+        const unreadIds = data.filter((n: Notification) => !n).map((n: Notification) => n.id);
         if (unreadIds.length > 0) await markNotificationsAsRead(unreadIds);
       } catch (error) {
         console.log(error)
@@ -61,7 +61,7 @@ function NotificationPage() {
           <div className="flex items-center justify-between">
             <CardTitle>Notifications</CardTitle>
             <span className="text-sm text-muted-foreground">
-              {notifications.filter((n) => !n.read).length} unread
+              {notifications.filter((n: number) => !n).length} unread
             </span>
           </div>
         </CardHeader>
@@ -105,6 +105,7 @@ function NotificationPage() {
                                 src={notification.post.image}
                                 alt="Post content"
                                 className="mt-2 rounded-md w-full max-w-[200px] h-auto object-cover"
+                                fill={true}
                               />
                             )}
                           </div>
