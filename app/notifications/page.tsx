@@ -61,7 +61,7 @@ function NotificationPage() {
           <div className="flex items-center justify-between">
             <CardTitle>Notifications</CardTitle>
             <span className="text-sm text-muted-foreground">
-              {notifications.filter((n: number) => !n).length} unread
+              {notifications.filter((n) => !n.read).length} unread
             </span>
           </div>
         </CardHeader>

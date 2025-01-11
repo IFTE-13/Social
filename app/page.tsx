@@ -6,8 +6,6 @@ import PostCard from "@/components/home/PostCard";
 import WhoToFollow from "@/components/home/WhoToFollow";
 import { currentUser } from "@clerk/nextjs/server";
 
-type Posts = Awaited<ReturnType<typeof getUserPosts>>;
-
 export default async function Home() {
   const user = await currentUser();
   const posts = await getPosts();
@@ -19,7 +17,7 @@ export default async function Home() {
         {user ? <CreatePost /> : null}
 
         <div className="space-y-6">
-          {posts.map((post : Posts) => (
+          {posts.map((post) => (
             <PostCard key={post.id} post={post} dbUserId={dbUserId} />
           ))}
         </div>
